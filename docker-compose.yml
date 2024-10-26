@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  web:
+    build: ./
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/home/app/liprofie
+    ports:
+      - '8000:8000'
+    restart: always
+    depends_on:
+      - db
+  db:
+    image: mysql
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: 'liprofie'
+      MYSQL_USER: 'liprofie_u'
+      MYSQL_PASSWORD: 'Ujkjdjkjvrf'
+      MYSQL_ROOT_PASSWORD: 'Ujkjdjkjvrf'
+    restart: always
+    volumes:
+      - db:/var/lib/mysql
+
+
+volumes:
+  db:
