@@ -1,12 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <link rel="stylesheet" href="{% static 'main_app/single_page.css' %}">
-  <link rel="icon" href="{% static 'main_app/img/logo.ico' %}">
+  <link rel="stylesheet" href="single_page.css">
+  <link rel="icon" href="img/logo.ico">
   <title>{{ attr_obj.title }}</title>
 </head>
 
@@ -14,7 +13,7 @@
   <main>
     <section class="container2 s1ip">
       <div class="menu">
-        <a href='{% url "main_page" %}' class="backBtn">На главную</a>
+        <a href='index.html' class="backBtn">На главную</a>
         <div>
           <a href="{% if last.link_pk %}{% url 'single_page' last.link_pk %}{% endif %}"
           class="last {% if not last.link_pk %}unactive{% endif %}"
@@ -50,7 +49,6 @@
             <div class="comment-form">
                 <h3>Оставьте комментарий</h3>
                 <form id="commentForm" method='POST'>
-                    {% csrf_token %}
                     <input id='name_input' type="text" name="name" placeholder="Имя">
                     <input id='email_input' type="email" name="email" placeholder="Почта">
                     <textarea id='comment_input' name="comment" placeholder="Комментарий"></textarea>
@@ -64,7 +62,6 @@
         Комментарии
         <span class="comments-number">{{ comments_num }}</span>  
       </h3>
-      {% for el in comm_obj %}
         <div class='comment_card'>
           <div>
             <div>
@@ -81,7 +78,6 @@
           </div>
           <span>{{ el.comment }}</span>
         </div>
-      {% endfor %}
     </div>
       <div class="menu" style="margin: 40px 0;">
         <a href='{% url "main_page" %}' class="backBtn">На главную</a>
@@ -98,8 +94,8 @@
       </div>
     </section>
   </main>
-  <script type="text/javascript" src='{% static "main_app/js/jquery.min.js" %}'></script>
-  <script type="text/javascript" src='{% static "main_app/js/single_page.js" %}'></script>
+  <script type="text/javascript" src='js/jquery.min.js'></script>
+  <script type="text/javascript" src='js/single_page.js'></script>
   <script>
       $(document).ready(function() {
         $('#commentForm').submit(function(event) {
