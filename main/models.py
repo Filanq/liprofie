@@ -6,12 +6,13 @@ class Auser(models.Model):
 
 
 class Profession(models.Model):
-    img = models.ImageField(blank=True, upload_to='professions')
     title = models.CharField(max_length=250, null=True)
     text = models.TextField(max_length=1000, null=True)
+    img1 = models.ImageField(blank=True, null=True, upload_to='professions')
+    img2 = models.ImageField(blank=True, null=True, upload_to='professions')
 
 
 class Place(models.Model):
-    img = models.ImageField(blank=True, upload_to='places')
     title = models.CharField(max_length=250, null=True)
     text = models.TextField(max_length=1000, null=True)
+    img = models.ImageField(blank=True, null=True, upload_to='places')
