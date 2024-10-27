@@ -286,7 +286,7 @@
             });
         });
 
-        $(document).ready(function ($) {
+        $(document).ready(async function ($) {
             $('.banner_fone').slick({
                 slidesToScroll: 1,
                 autoplay: true,
@@ -296,28 +296,32 @@
                 speed: 1000,
             });
 
-            setTimeout(() => {
 
-            $('.posterBlock').slick({
-                slidesToScroll: 1,
-                infinite: true,
-                slidesToShow: 2,
-                autoplay: true,
-                arrows: true,
-                prevArrow: `<div class="prevArrowSlider"><div></div></div>`,
-                nextArrow: `<div class="nextArrowSlider"><div></div></div>`,
-                autoplaySpeed: 2500,
-                speed: 1000,
-                responsive: [
-                    {
-                        breakpoint: 605,
-                        settings: {
-                            slidesToShow: 1
-                        }
-                    }
-                ]
+            loadProfessions().then(res => {
+                loadPlaces().then(res => {
+                    setTimeout(() => {
+                        $('.posterBlock').slick({
+                            slidesToScroll: 1,
+                            infinite: true,
+                            slidesToShow: 2,
+                            autoplay: true,
+                            arrows: true,
+                            prevArrow: `<div class="prevArrowSlider"><div></div></div>`,
+                            nextArrow: `<div class="nextArrowSlider"><div></div></div>`,
+                            autoplaySpeed: 2500,
+                            speed: 1000,
+                            responsive: [
+                                {
+                                    breakpoint: 605,
+                                    settings: {
+                                        slidesToShow: 1
+                                    }
+                                }
+                            ]
+                        });
+                    }, 1000)
+                });
             });
-            }, 1500)
         });
     });
 </script>
