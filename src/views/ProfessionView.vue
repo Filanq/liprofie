@@ -1,39 +1,84 @@
 <template>
     <main>
-        <section class="container2 s1ip">
+        <section class="container2 s1ip" v-if="!error">
             <div class="menu">
                 <router-link to='/' class="backBtn">На главную</router-link>
             </div>
-            <h2 class="h1Text"> Заголовок </h2>
+
+            <h2 class="h1Text"> {{ data.title }} </h2>
             <div>
                 <div class="posterBlock2">
-                    <img id="mainImg" src="../assets/img/admin/cat.png" alt="Картинка 1">
-                    <img id="secImg" src="../assets/img/admin/cat.png" alt="Картинка 2">
+                    <img id="mainImg" :src="data.img1" alt="Картинка 1">
+                    <img id="secImg" :src="data.img1" alt="Картинка 2">
                 </div>
-                <p id="mainText"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor nam cumque cum! Adipisci nisi cupiditate quia dolore, possimus vero soluta harum, exercitationem eos fugit nobis illum, placeat provident? Delectus, aliquam? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet distinctio voluptatem porro consectetur modi eum et eius natus optio rerum voluptate blanditiis at, hic excepturi voluptatibus suscipit ratione id quisquam?
-                Saepe, ullam reiciendis voluptate veniam repellendus ea eos, nesciunt quod harum consectetur vitae sapiente quos! Officiis obcaecati consequatur nemo? Consequatur libero perferendis tenetur accusamus doloremque necessitatibus obcaecati facilis officia dolores.
-                Sed vero in nihil dignissimos qui ullam eaque, excepturi natus, ea iusto quae at dicta eum illo accusamus distinctio quod minima? Distinctio beatae nam vitae aliquam harum. Officia, sapiente possimus!
-                Iure itaque at facilis similique reprehenderit dolores totam quae, dicta, a voluptate mollitia sint esse eos laborum perferendis dolore! Eum laboriosam temporibus quos neque dolor accusantium possimus aperiam nisi libero.</p>
+                <p id="mainText">
+                    {{ data.text }}
+                </p>
             </div>
             <div class="menu" style="margin: 40px 0;">
                 <router-link to='/' class="backBtn">На главную</router-link>
                 <div>
-                    <a href="#"
-                       class="last {% if not last.link_pk %}unactive{% endif %}"
-                       title="{% if last.link_pk %} last.title {% endif %}">
-                        <div></div></a>
-                    <a href="#"
-                       class="next {% if not next.link_pk %}unactive{% endif %}"
-                       title="{% if next.link_pk %} next.title {% endif %}">
-                        <div></div></a>
+                    <router-link v-if="Number(router.query.professionId) - 1 >= 1 && professions.filter(el => {return el.id === Number(router.query.professionId) - 1}).length > 0" :to="'/profession/' + (Number(router.query.professionId) - 1)">
+                        <div></div>
+                    </router-link>
+                    <router-link v-if="next_id !== -1" :to="'/profession/' + next_id">
+                        <div></div>
+                    </router-link>
                 </div>
             </div>
+        </section>
+        <section class="container2 s1ip" v-else>
+            <div class="menu">
+                <router-link to='/' class="backBtn">На главную</router-link>
+            </div>
+            <h2 class="h1Text">{{ error }}</h2>
         </section>
     </main>
 </template>
 
 <script setup lang="ts">
+    import type {Professions} from "@/types";
+    import {ref, type Ref} from "vue";
+    import axios from "axios";
+    import { useRoute } from "vue-router";
 
+    let data: Ref<Professions> = ref({
+        id: 0,
+        title: '',
+        text: '',
+        img1: '',
+        img2: ''
+    });
+
+    let router = useRoute();
+
+    let professions: Ref<Professions[]> = ref([]);
+
+    let next_id: Ref<number> = ref(0);
+
+    let error: Ref<string> = ref('');
+
+    const loadProfessions = () => {
+        axios.get(window.origin + '/api/professions').then(res => {
+            console.log(res);
+            professions.value = res.data.professions;
+            if(professions.value === undefined){
+                error.value = 'Страница не найдена';
+                return;
+            }
+            let current_profession = professions.value.filter((el) => {return el.id === Number(router.query.professionId)})[0];
+            if(current_profession === undefined){
+                error.value = 'Страница не найдена';
+                return;
+            }
+            next_id.value = professions.value.indexOf(data.value) + 1;
+            if(professions.value[next_id.value] === undefined){
+                next_id.value = -1;
+            }
+        });
+    };
+
+    loadProfessions();
 </script>
 
 <style scoped>
