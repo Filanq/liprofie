@@ -206,8 +206,6 @@
     };
 
     let render: Ref<boolean> = ref(false);
-    loadProfessions();
-    loadPlaces();
     onUnmounted(() => {
         render.value = false;
     });
@@ -318,7 +316,7 @@
                             }
                         ]
                     });
-                }, 500);
+                }, 100);
             });
             loadPlaces();
         });
