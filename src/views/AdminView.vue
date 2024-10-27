@@ -56,7 +56,10 @@
                     </div>
                 </div>
 <!--  -->
-                <h2>Достопримечания</h2>
+<div class="wrap_title">
+                    <h2>Профессии</h2>
+                    <div class="btn">+</div>
+                </div>
                 <div class="wrap">
                     <div class="block" style="">
                         <div class="block_top_wrap">
@@ -121,8 +124,7 @@ import AddComponents from "@/components/AddComponents.vue";
 .wrap_title{
     display: flex;
     flex-direction: row;
-    gap: 20px;
-    /* justify-content: space-between; */
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     margin-top: 70px;
