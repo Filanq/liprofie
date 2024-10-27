@@ -1,40 +1,121 @@
 <template>
     <main class="section__login">
         <div class="container__login">
-            <div class="cross"></div>
+            <div @click="emits('close'); error = ''" class="cross"></div>
             <h3>Добавить</h3>
             <form action="#">
                 <label for="">
                     <span class="title">Название</span>
-
-
-                    <input class="input_password" type="text" placeholder="Название карточки">
+                    <input v-model="data.title" class="input_password" type="text" placeholder="Название карточки">
                 </label>
 
                 <label for="">
                     <span class="title">Текст</span>
-                    
-                    <textarea style="resize: none;" class="input_password" rows="5" cols="20" placeholder="Напишите описание"></textarea>
+                    <textarea v-model="data.text" style="resize: none;" class="input_password" rows="5" cols="20" placeholder="Напишите описание"></textarea>
                 </label>
 
                 <label for="">
                     <span class="title">Фото:</span>
-                    <div class="group_edit input-file">
-                        <input type="file" name="file">
-                        <span class="input-file-btn">Выберите файл 1</span>           
+                    <label for="img1" class="group_edit input-file">
+                        <input type="file" name="file" id="img1">
+                        <span class="input-file-btn">Выберите файл 1</span>
                         <span class="input-file-text">Максимум 10мб</span>
-                    </div>
-                    <div class="group_edit input-file">
-                        <input type="file" name="file">
-                        <span class="input-file-btn">Выберите файл 2</span>           
+                    </label>
+                    <label for="img2" class="group_edit input-file">
+                        <input type="file" name="file" id="img2">
+                        <span class="input-file-btn">Выберите файл 2</span>
                         <span class="input-file-text">Максимум 10мб</span>
-                    </div>
+                    </label>
                 </label>
-                <input class="input_submit" type="submit" value="Сохранить">
+                <p v-show="error" class="login-error">{{ error }}</p>
+                <input @click.prevent="submit()" class="input_submit" type="submit" value="Сохранить">
             </form>
         </div>
     </main>
 </template>
+
+
+<script setup lang="ts">
+    import "@/assets/css/style.css";
+    import {onMounted, type Ref, ref} from "vue";
+    import type { Professions } from '@/types';
+    import { useUserStore } from '@/stores/user';
+    import axios from "axios";
+
+    const emits = defineEmits(['close']);
+    let error: Ref<string> = ref('');
+    let user = useUserStore();
+
+    let data: Ref<Professions> = ref({
+        id: 0,
+        title: '',
+        text: '',
+        img1: '',
+        img2: '',
+    });
+
+    onMounted(() => {
+        document.querySelectorAll(".input-file").forEach(input_container => {
+            let file: any = input_container.querySelector('input');
+            let text: any = input_container.querySelector(".input-file-btn");
+            file.addEventListener("change", (e: any) => {
+                if(file.files[0].size > 10485760){
+                    error.value = "Файл превысил 10мб";
+                    file.files = new DataTransfer().files;
+                }
+                else{
+                    error.value = "";
+                    text.textContent = file.files[0].name;
+                }
+            });
+        });
+    });
+
+    const submit = () => {
+        if(user.is_auth){
+            let img1: any = document.querySelector('#img1');
+            if(img1.files.length > 0){
+                img1 = img1.files[0];
+            }
+            else{
+                img1 = null;
+            }
+
+            let img2: any = document.querySelector('#img2');
+            if(img2.files.length > 0){
+                img2 = img2.files[0];
+            }
+            else{
+                img2 = null;
+            }
+
+            axios.post(window.origin + "/api/professions/", {
+                title: data.value.title,
+                text: data.value.text,
+                img1: img1,
+                img2: img2,
+            }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                    "X-CSRFTOKEN": user.getCookie('csrftoken')
+                }
+            }).then(res => {
+                emits('close');
+                data.value = {
+                    id: 0,
+                    title: '',
+                    text: '',
+                    img1: '',
+                    img2: '',
+                };
+                error.value = '';
+            });
+        }
+        else{
+            error.value = 'Авторизуйтесь'
+        }
+    }
+</script>
 
 <style> 
     .cross{
@@ -179,11 +260,3 @@
     }
     
 </style>
-
-<script setup lang="ts">
-    import "@/assets/css/style.css";
-    import {type Ref, ref} from "vue";
-
-    let editTitilwOn: Ref<boolean> = ref(false);
-    let ediTextOn: Ref<boolean> = ref(false);
-</script>

@@ -7,6 +7,9 @@
     <title>Liprofie</title>
   </head>
   <body>
+    <div style="display: none">
+      {% csrf_token %}
+    </div>
     <div id="app"></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
