@@ -4,7 +4,6 @@ import type { Ref } from "vue";
 import axios from "axios";
 
 export const useUserStore = defineStore('user', () => {
-    const id: Ref<number> = ref(0);
     const is_auth: Ref<boolean> = ref(false);
 
     function getCookie(name: string){
@@ -25,16 +24,9 @@ export const useUserStore = defineStore('user', () => {
 
     function login(){
         axios.get(window.origin + '/api/auth').then(res => {
-            if(res.data.user.is_auth){
-                id.value = res.data.id;
-                is_auth.value = true;
-            }
-            else{
-                id.value = 0;
-                is_auth.value = false;
-            }
+            is_auth.value = !!res.data.is_auth;
         });
     }
 
-    return { id, is_auth, getCookie, login };
+    return { is_auth, getCookie, login };
 });
