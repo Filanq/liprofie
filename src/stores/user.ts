@@ -26,7 +26,7 @@ export const useUserStore = defineStore('user', () => {
     function login(){
         axios.get(window.origin + '/api/auth').then(res => {
             if(res.data.user.is_auth){
-                id.value = res.data.user.id;
+                id.value = res.data.id;
                 is_auth.value = true;
             }
             else{
