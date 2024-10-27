@@ -1,9 +1,12 @@
 <template>
     
-    <LoginView v-if="isLoginOpened"/>
+    <LoginComponent v-if="isLoginOpened"/>
 
     <main class="section">
         <div class="container">
+            <div class="menu">
+                <router-link to='/' class="backBtn">На главную</router-link>
+            </div>
             <h1 >Админка</h1>
             <!-- добавление удаление изменение профессий  -->
             <!-- достопримечательностей тоже самое -->
@@ -75,8 +78,70 @@
     </main>
 </template>
 
-<style>
 
+<script setup lang="ts">
+import {onMounted, type Ref, ref, watch} from "vue";
+    import "@/assets/css/style.css";
+    import LoginComponent from "@/components/LoginComponent.vue";
+
+    let isLoginOpened: Ref<boolean> = ref(false);
+
+    onMounted(() => {
+        if(isLoginOpened.value){
+            document.body.style.overflowY = 'hidden';
+        }
+        else{
+            document.body.style.overflowY = '';
+        }
+
+        watch(isLoginOpened, () => {
+            if(isLoginOpened.value){
+                document.body.style.overflowY = 'hidden';
+            }
+            else{
+                document.body.style.overflowY = '';
+            }
+        });
+    });
+</script>
+
+<style scoped>
+.backBtn {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 10px 5px;
+    background-color: #FF7400;
+    color: #FFF;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.backBtn::before {
+    content: "";
+    display: block;
+    height: 10px;
+    width: 10px;
+    margin-right: 5px;
+    border: solid #FFF;
+    border-width: 2px 2px 0 0;
+    transform: rotate(-135deg);
+    transition: all 0.2s ease-in-out;
+}
+
+.backBtn:hover {
+    background-color: #DB6300;
+}
+
+.backBtn:hover::before {
+    margin-right: 20px;
+}
+
+    .menu {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+    }
     h1{
         font-size: 80px;
     }
@@ -93,7 +158,7 @@
 
     .section{
         width: 100%;
-        padding: 150px 0;
+        padding: 100px 0;
     }
 
     h2{
@@ -178,11 +243,3 @@
     }
 
 </style>
-    
-<script setup lang="ts">
-    import { ref } from "vue";
-    import "@/assets/css/style.css";
-    import LoginView from "@/views/LoginView.vue";
-
-    let isLoginOpened = ref(false);
-</script>

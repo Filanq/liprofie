@@ -22,7 +22,8 @@
         position: fixed;
         width: 100vw;
         height: 100vh;
-        background: rgba(0, 0, 0, 0.380);
+        background-color: rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(50px);
         display: flex;
         justify-content: center;
         align-items: center;

@@ -16,32 +16,9 @@ const router = createRouter({
       component: () => import('@/views/ProfessionView.vue')
     },
     {
-      path: '/login',
-      name: 'login',
-      component: () => import('@/views/LoginView.vue'),
-      beforeEnter: (to, from, next) => {
-        let user = useUserStore();
-        if (user.is_auth){
-          next()
-        }
-        else{
-          next({name: 'admin'})
-        }
-      }
-    },
-    {
       path: '/admin',
       name: 'admin',
-      component: () => import('@/views/AdminView.vue'),
-      beforeEnter: (to, from, next) => {
-        let user = useUserStore();
-        if (user.is_auth){
-          next()
-        }
-        else{
-          next({name: 'login'})
-        }
-      }
+      component: () => import('@/views/AdminView.vue')
     },
   ]
 })
