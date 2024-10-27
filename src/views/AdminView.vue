@@ -1,17 +1,23 @@
 <template>
     
     <LoginComponent v-if="isLoginOpened"/>
+    <EditComponents v-if="isEditOpened"/>
+    <AddComponents v-if="isAddOpende"/>
+    <!-- <AddComponents v-if="true"/> -->
 
     <main class="section">
         <div class="container">
             <div class="menu">
                 <router-link to='/' class="backBtn">На главную</router-link>
             </div>
-            <h1 >Админка</h1>
+            <h1 >Админ панель</h1>
             <!-- добавление удаление изменение профессий  -->
             <!-- достопримечательностей тоже самое -->
             <div class="main_wrap main_wrap--prof">
-                <h2>Профессии</h2>
+                <div class="wrap_title">
+                    <h2>Профессии</h2>
+                    <div class="btn">+</div>
+                </div>
                 <div class="wrap">
                     <div class="block" style="">
                         <div class="block_top_wrap">
@@ -83,8 +89,12 @@
 import {onMounted, type Ref, ref, watch} from "vue";
     import "@/assets/css/style.css";
     import LoginComponent from "@/components/LoginComponent.vue";
+    import EditComponents from "@/components/EditComponents.vue"
+import AddComponents from "@/components/AddComponents.vue";
 
     let isLoginOpened: Ref<boolean> = ref(false);
+    let isEditOpened: Ref<boolean> = ref(false)
+    let isAddOpende: Ref<boolean> = ref(false)
 
     onMounted(() => {
         if(isLoginOpened.value){
@@ -103,9 +113,30 @@ import {onMounted, type Ref, ref, watch} from "vue";
             }
         });
     });
-</script>
+
+</script>  
 
 <style scoped>
+
+.wrap_title{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    /* justify-content: space-between; */
+    align-items: center;
+    width: 100%;
+    margin-top: 70px;
+}
+
+.btn{
+    padding: 2px 10px;
+    border-radius: 10px;
+    color: white;
+    background-color: #FF7400;
+    font-size: 40px;
+    cursor: pointer;
+}
+
 .backBtn {
     display: flex;
     align-items: center;
@@ -162,7 +193,6 @@ import {onMounted, type Ref, ref, watch} from "vue";
     }
 
     h2{
-        margin-top: 70px;
         font-size: 48px;
         position: relative;
         margin-left: 10px;

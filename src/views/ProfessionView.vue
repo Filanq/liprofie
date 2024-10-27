@@ -7,29 +7,22 @@
             <h2 class="h1Text"> Заголовок </h2>
             <div>
                 <div class="posterBlock2">
-                    <img id="mainImg" src="" alt="Картинка 1">
-                    <img id="secImg" src="" alt="Картинка 2">
+                    <img id="mainImg" src="../assets/img/admin/cat.png" alt="Картинка 1">
+                    <img id="secImg" src="../assets/img/admin/cat.png" alt="Картинка 2">
                 </div>
-                <p id="mainText"> Фулл текст </p>
-            </div>
-            <div class="posterBlock2">
-                <div>
-                    <div></div>
-                    <a class="map">
-                        <iframe
-                                src="https://yandex.ru/map-widget/v1/?um=constructor%3Afafabcc11bceef9db2295de3e10e0eaff88e7c49b1a72750457d4d6d825a5b37&amp;source=constructor"
-                                width="100%" height="400" frameborder="0"></iframe>
-                    </a>
-                </div>
+                <p id="mainText"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor nam cumque cum! Adipisci nisi cupiditate quia dolore, possimus vero soluta harum, exercitationem eos fugit nobis illum, placeat provident? Delectus, aliquam? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Amet distinctio voluptatem porro consectetur modi eum et eius natus optio rerum voluptate blanditiis at, hic excepturi voluptatibus suscipit ratione id quisquam?
+                Saepe, ullam reiciendis voluptate veniam repellendus ea eos, nesciunt quod harum consectetur vitae sapiente quos! Officiis obcaecati consequatur nemo? Consequatur libero perferendis tenetur accusamus doloremque necessitatibus obcaecati facilis officia dolores.
+                Sed vero in nihil dignissimos qui ullam eaque, excepturi natus, ea iusto quae at dicta eum illo accusamus distinctio quod minima? Distinctio beatae nam vitae aliquam harum. Officia, sapiente possimus!
+                Iure itaque at facilis similique reprehenderit dolores totam quae, dicta, a voluptate mollitia sint esse eos laborum perferendis dolore! Eum laboriosam temporibus quos neque dolor accusantium possimus aperiam nisi libero.</p>
             </div>
             <div class="menu" style="margin: 40px 0;">
                 <a href='url "main_page"' class="backBtn">На главную</a>
                 <div>
-                    <a href="{% if last.link_pk %}{% url 'single_page' last.link_pk %}{% endif %}"
+                    <a href="#"
                        class="last {% if not last.link_pk %}unactive{% endif %}"
                        title="{% if last.link_pk %} last.title {% endif %}">
                         <div></div></a>
-                    <a href="{% if next.link_pk %}{% url 'single_page' next.link_pk %}{% endif %}"
+                    <a href="#"
                        class="next {% if not next.link_pk %}unactive{% endif %}"
                        title="{% if next.link_pk %} next.title {% endif %}">
                         <div></div></a>

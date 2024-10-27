@@ -1,12 +1,12 @@
 <template>
     <main class="section__login">
         <div class="container__login">
-            <div class="cross"></div>
             <h3>Введите пароль</h3>
             <form action="#">
                 <input class="input_password" type="password">
                 <input class="input_submit" type="submit" value="Войти">
             </form>
+            <p class="login-error">Неправильный пароль!</p>
         </div>
     </main>
 </template>
@@ -65,6 +65,13 @@
     .input_password{
         border: 1px solid black;
         outline: none;
+    }
+
+    .login-error{
+        font-size: 18px;
+        margin: 0;
+        color: red;
+        margin-top: 20px;
     }
     
 </style>
