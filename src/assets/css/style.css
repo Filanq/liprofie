@@ -346,6 +346,47 @@ main {
     margin-right: 20px;
 }
 
+.prevArrowSlider,
+.nextArrowSlider {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 20px;
+    border-radius: 10px 5px;
+    background-color: #55a4ff;
+    color: #FFF;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    order: -1;
+}
+
+.nextArrowSlider {
+    margin-left: 5px;
+}
+
+.prevArrowSlider:hover,
+.nextArrowSlider:hover {
+    background-color: #2c5eaa;
+}
+
+.prevArrowSlider > div,
+.nextArrowSlider > div {
+    height: 10px;
+    width: 10px;
+    margin: 0 0 0 4px;
+    border: solid #FFF;
+    border-width: 2px 2px 0 0;
+    transform: rotate(-135deg);
+    transition: all 0.2s ease-in-out;
+}
+
+.nextArrowSlider > div {
+    transform: rotate(45deg);
+    margin: 0 4px 0 0;
+}
+
 .banner_fone .slick-slide img { 
     min-width: 100%;
     min-height: 100vh;
@@ -474,7 +515,7 @@ main {
 
 .s2 {
     padding: 90px 30px;
-    height: 830px;
+    height: 894px;
 }
 
 .s2_fone {
@@ -902,7 +943,7 @@ footer>div>div:nth-child(2)>svg {
     }
 
     .s2 {
-        height: 630px;
+        height: 694px;
     }
 
     .posterBlock .posterBlockSlide>a {

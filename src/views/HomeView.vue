@@ -273,8 +273,10 @@
                 infinite: true,
                 slidesToShow: 2,
                 autoplay: true,
-                arrows: false,
-                autoplaySpeed: 5000,
+                arrows: true,
+                prevArrow: `<div class="prevArrowSlider"><div></div></div>`,
+                nextArrow: `<div class="nextArrowSlider"><div></div></div>`,
+                autoplaySpeed: 2500,
                 speed: 1000,
                 responsive: [
                     {
