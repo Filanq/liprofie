@@ -1,10 +1,11 @@
 import { defineStore } from 'pinia';
 import { ref } from "vue";
 import type { Ref } from "vue";
+import axios from "axios";
 
 export const useUserStore = defineStore('user', () => {
     const id: Ref<number> = ref(0);
-    const is_auth: Ref<boolean> = ref(true);
+    const is_auth: Ref<boolean> = ref(false);
 
     function getCookie(name: string){
         let cookieValue = null;
@@ -22,5 +23,18 @@ export const useUserStore = defineStore('user', () => {
         return cookieValue;
     }
 
-    return { id, is_auth, getCookie };
+    function login(){
+        axios.get(window.origin + '/api/auth').then(res => {
+            if(res.data.user.is_auth){
+                id.value = res.data.user.id;
+                is_auth.value = true;
+            }
+            else{
+                id.value = 0;
+                is_auth.value = false;
+            }
+        });
+    }
+
+    return { id, is_auth, getCookie, login };
 });

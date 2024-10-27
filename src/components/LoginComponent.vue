@@ -3,13 +3,45 @@
         <div class="container__login">
             <h3>Введите пароль</h3>
             <form action="#">
-                <input class="input_password" type="password">
-                <input class="input_submit" type="submit" value="Войти">
+                <input v-model="password" class="input_password" type="password">
+                <input @click.prevent="submit()" class="input_submit" type="submit" value="Войти">
             </form>
-            <p class="login-error">Неправильный пароль!</p>
+            <p v-show="error" class="login-error">{{ error }}</p>
         </div>
     </main>
 </template>
+
+<script setup lang="ts">
+    import "@/assets/css/style.css";
+    import { ref, type Ref } from "vue";
+    import axios from "axios";
+    import {useUserStore} from "@/stores/user";
+
+    let error: Ref<string> = ref('');
+    let password: Ref<string> = ref('');
+    let user = useUserStore();
+
+    const emits = defineEmits(['success']);
+
+    const submit = () => {
+        axios.post(window.origin + '/api/login', {
+            password: password
+        }, {
+            headers: {
+                "X-CSRFTOKEN": user.getCookie('csrftoken')
+            }
+        }).then(res => {
+            if(res.data.result){
+                user.login();
+                emits('success');
+            }
+            else{
+                error.value = res.data.error
+            }
+        });
+    };
+</script>
+
 
 <style> 
     h3{
@@ -54,7 +86,7 @@
     .input_submit{
         border-radius: 10px;
         color: white;
-        background-color: #FF7400;
+        background-color: #55a4ff;
         padding: 5px 10px;
         font-size: 18px;
         border: none;
@@ -75,7 +107,3 @@
     }
     
 </style>
-
-<script setup lang="ts">
-    import "@/assets/css/style.css";
-</script>

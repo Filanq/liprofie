@@ -1,6 +1,6 @@
 <template>
     
-    <LoginComponent v-if="isLoginOpened"/>
+    <LoginComponent @success="closeLogin()" v-if="isLoginOpened"/>
     <EditComponentsPlaces :place="editPlacesData" v-if="isEditPlacesOpened" @close="closeEditPlaces()"/>
     <AddComponentsPlaces v-if="isAddPlacesOpened" @close="closeAddPlaces()"/>
     <EditComponentsProf :prof="editProfData" v-if="isEditProfOpened" @close="closeEditProf()"/>
@@ -81,13 +81,13 @@
     import axios from "axios";
     import {useUserStore} from "@/stores/user";
 
-    let isLoginOpened: Ref<boolean> = ref(false);
+    let user = useUserStore();
+
+    let isLoginOpened: Ref<boolean> = ref(!user.is_auth);
     let isEditPlacesOpened: Ref<boolean> = ref(false);
     let isAddPlacesOpened: Ref<boolean> = ref(false);
     let isEditProfOpened: Ref<boolean> = ref(false);
     let isAddProfOpened: Ref<boolean> = ref(false);
-
-    let user = useUserStore();
 
     let editPlacesData: Ref<Places> = ref({
         id: 0,
@@ -154,6 +154,10 @@
         });
     };
 
+    const closeLogin = () => {
+        isLoginOpened.value = false;
+    };
+
     let professions: Ref<Professions[]> = ref([]);
 
     const loadProfessions = () => {
@@ -205,7 +209,7 @@
     padding: 2px 10px;
     border-radius: 10px;
     color: white;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     font-size: 40px;
     cursor: pointer;
 }
@@ -215,7 +219,7 @@
     align-items: center;
     padding: 10px 15px;
     border-radius: 10px 5px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     color: #FFF;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -277,7 +281,7 @@
         position: absolute;
         width: 4px;
         height: 100%    ;
-        background-color: #FF7400;
+        background-color: #55a4ff;
         border-radius: 2px;
         transition: all 0.2s ease-in-out;
         top: 0;

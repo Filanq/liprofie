@@ -164,7 +164,7 @@
     .input_submit{
         border-radius: 10px;
         color: white;
-        background-color: #FF7400;
+        background-color: #55a4ff;
         padding: 5px 10px;
         font-size: 18px;
         border: none;
@@ -208,7 +208,7 @@
         color: rgb(255 255 255);
         text-align: center;
         border-radius: 4px;
-        background-color: #FF7400;
+        background-color: #55a4ff;
         line-height: 22px;
         height: 40px;
         padding: 10px 20px;
