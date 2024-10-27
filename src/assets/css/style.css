@@ -96,6 +96,11 @@ li {
     list-style: none;
 }
 
+.anchor {
+    position: relative;
+    top: -100px;
+}
+
 header {
     position: fixed;
     top: 0;
@@ -115,15 +120,15 @@ header {
     border-radius: 0 0 40px 20px;
 }
 
-.smallHeader>div>span:nth-child(1)>h2 {
+.smallHeader>div>a:nth-child(1)>h2 {
     color: #000;
 }
 
-.smallHeader>div>ul>li>span>b {
+.smallHeader>div>ul>li>a>b {
     color: #000;
 }
 
-.smallHeader>div>span:hover>div {
+.smallHeader>div>a:hover>div {
     background-color: #000;
 }
 
@@ -136,18 +141,14 @@ header {
     padding: 0 30px;
 }
 
-header>div>span {
-    cursor: pointer;
-}
-
-header>div>span>h2 {
+header>div>a>h2 {
     display: block;
     font-size: 32px;
     color: #FFF;
     transition: all 0.2s ease-in-out;
 }
 
-header>div>span>h2>span {
+header>div>a>h2>span {
     display: block;
     font-family: "Montserrat", sans-serif;
     font-size: 48px;
@@ -220,7 +221,7 @@ header>div>ul>li:nth-child(n+2) {
     margin-left: 40px;
 }
 
-header>div>ul>li>span>b {
+header>div>ul>li>a>b {
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -230,13 +231,13 @@ header>div>ul>li>span>b {
     transition: all 0.2s ease-in-out;
 }
 
-header>div>ul>li>span:hover>b {
+header>div>ul>li>a:hover>b {
     color: #FF7400;
 }
 
 /* header > div > ul > li > span:hover > span {border-color:#FF7400;} */
 
-header>div>ul>li>span::after {
+header>div>ul>li>a::after {
     content: "";
     display: block;
     width: 100%;
@@ -278,7 +279,7 @@ header>div>ul>li>span::after {
     }
 }
 
-header>div>ul>li>span>span {
+header>div>ul>li>a>span {
     vertical-align: top;
     display: inline-block;
     width: 13px;
@@ -318,21 +319,29 @@ main {
     position: absolute;
     align-items: flex-start;
     z-index: -1;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     overflow: hidden;
 }
 
 .banner, .banner_fone { transition: all 0.2s ease-in-out; }
 
-.slick-slider,
-.slick-track,
-.slick-list,
-.slick-slide {
+.banner_fone .slick-slider,
+.banner_fone .slick-track,
+.banner_fone .slick-list,
+.banner_fone .slick-slide {
     min-height: 100vh;
 }
 
-.slick-slide { object-fit: cover; }
+.posterBlock .slick-slide {
+    margin-right: 20px;
+}
+
+.banner_fone .slick-slide img { 
+    min-width: 100%;
+    min-height: 100vh;
+    object-fit: cover; 
+}
 
 .h1Text {
     display: flex;
@@ -456,6 +465,7 @@ main {
 
 .s2 {
     padding: 90px 30px;
+    height: 830px;
 }
 
 .s2_fone {
@@ -481,7 +491,6 @@ main {
 
 .s2>h2 {
     color: #FFF;
-    width: 690px;
 }
 
 .posterBlock {
@@ -491,23 +500,26 @@ main {
     margin-top: 40px;
 }
 
-.posterBlock>div {
+.posterBlock .posterBlockSlide {
     display: flex;
     width: calc(50% - 10px);
 }
 
-.posterBlock>div:nth-child(even) {
+.posterBlock .posterBlockSlide:nth-child(even) {
     margin-left: 20px;
 }
 
-.posterBlock>div:nth-child(n+3) {
+.posterBlock .posterBlockSlide:nth-child(n+3) {
     margin-top: 20px;
 }
 
-.posterBlock>div>a {
+.posterBlock .posterBlockSlide>a {
+    position: relative;
+    top: -490px;
+    left: 15px;
+    display: block;
     width: calc(100% - 15px);
     height: 505px;
-    margin: 15px 0 0 calc(-100% + 30px);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -517,14 +529,14 @@ main {
     overflow: hidden;
 }
 
-.posterBlock>div>div {
+.posterBlock .posterBlockSlide>div {
     width: calc(100% - 15px);
     height: 505px;
     background-color: #FF7400;
     border-radius: 10px 5px;
 }
 
-.posterBlock>div>a>div {
+.posterBlock .posterBlockSlide>a>div {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -536,18 +548,18 @@ main {
     transition: all 0.4s ease-in-out;
 }
 
-.posterBlock>div>a:hover>div {
+.posterBlock .posterBlockSlide>a:hover>div {
     margin-top: 0px;
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 10px 5px;
 }
 
-.posterBlock>div>a>div>h3 {
+.posterBlock .posterBlockSlide>a>div>h3 {
     font-size: 32px;
     transition: all 0.4s ease-in-out;
 }
 
-.posterBlock>div>a>div>span {
+.posterBlock .posterBlockSlide>a>div>span {
     display: block;
     font-size: 16px;
     color: rgba(0, 0, 0, 0.7);
@@ -559,24 +571,24 @@ main {
 }
 
 
-.posterBlock>div>a>div>span::-webkit-scrollbar-thumb,
-.posterBlock>div>a>div>span::-webkit-scrollbar-track {
+.posterBlock .posterBlockSlide>a>div>span::-webkit-scrollbar-thumb,
+.posterBlock .posterBlockSlide>a>div>span::-webkit-scrollbar-track {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.posterBlock>div>a:hover>div>h3 {
+.posterBlock .posterBlockSlide>a:hover>div>h3 {
     color: #FFF;
 }
 
-.posterBlock>div>a:hover>div>span {
+.posterBlock .posterBlockSlide>a:hover>div>span {
     color: rgba(255, 255, 255, 0.8);
 }
 
-.posterBlock>div>a:hover>div>span::-webkit-scrollbar-thumb {
+.posterBlock .posterBlockSlide>a:hover>div>span::-webkit-scrollbar-thumb {
     background-color: #FF7400;
 }
 
-.posterBlock>div>a:hover>div>span::-webkit-scrollbar-track {
+.posterBlock .posterBlockSlide>a:hover>div>span::-webkit-scrollbar-track {
     background-color: rgba(0, 0, 0, 0);
 }
 
@@ -753,6 +765,11 @@ footer>div>div:nth-child(2)>div {
     font-weight: 600;
 }
 
+.stars {
+    display: flex;
+    gap: 7px;
+}
+
 .stars>svg,
 footer>div>div:nth-child(2)>svg {
     width: auto;
@@ -811,18 +828,18 @@ footer>div>div:nth-child(2)>svg {
     }
     .header_buttons::-webkit-scrollbar { width: 0; }
 
-    header>div>ul>li>span::after {
+    header>div>ul>li>a::after {
         display: none;
     }
-    header>div>ul>li>span { transition: all 0.2s ease-in-out; }
-    header>div>ul>li>span:hover{ background-color: #FF7400; }
-    header>div>ul>li>span:hover>b { color: #FFF; }
+    header>div>ul>li>a { transition: all 0.2s ease-in-out; }
+    header>div>ul>li>a:hover{ background-color: #FF7400; }
+    header>div>ul>li>a:hover>b { color: #FFF; }
 
     .header_buttons>li {
         margin-left: 0 !important;
     }
 
-    .header_buttons>li span {
+    .header_buttons>li a {
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -831,13 +848,13 @@ footer>div>div:nth-child(2)>svg {
         padding: 20px;
     }
 
-    .header_buttons>li span { border-bottom: solid rgba(0, 0, 0, 0.2) 1px; }
+    .header_buttons>li a { border-bottom: solid rgba(0, 0, 0, 0.2) 1px; }
 
-    .header_buttons>li span::after {
+    .header_buttons>li a::after {
         margin-top: 5px;
     }
 
-    .header_buttons>li span b {
+    .header_buttons>li a b {
         color: #000;
     }
 
@@ -875,6 +892,23 @@ footer>div>div:nth-child(2)>svg {
         display: block;
     }
 
+    .s2 {
+        height: 630px;
+    }
+
+    .posterBlock .posterBlockSlide>a {
+        height: 305px;
+        top: -290px;
+    }
+
+    .posterBlock .posterBlockSlide>div {
+        height: 305px;
+    }
+    
+    .posterBlock .posterBlockSlide>a>div {
+        margin-top: 155px;
+    }
+
     .posterBlock2>div {
         width: calc((100% - 20px) / 2);
         margin-left: 0;
@@ -897,31 +931,9 @@ footer>div>div:nth-child(2)>svg {
     .banner svg {
         width: 80px;
     }
-
-    .posterBlock {
-        flex-direction: column;
-    }
-
-    .posterBlock>div {
-        width: 100%;
-        margin-left: 0 !important;
-    }
-
-    .posterBlock>div:nth-child(n+2) {
-        margin-top: 20px;
-    }
 }
 
 @media screen and (max-width: 605px) {
-    .posterBlock>div:nth-child(n+2) {
-        margin-top: 20px;
-    }
-
-    .posterBlock>div>a>div {
-        margin-top: 402px;
-    }
-
-    .posterBlock>div>a>div>span,
     .posterBlock2>div>a>div>span {
         display: none;
     }
@@ -937,11 +949,11 @@ footer>div>div:nth-child(2)>svg {
 }
 
 @media screen and (max-width: 476px) {
-    header>div>span>h2>span {
+    header>div>a>h2>span {
         font-size: 10.08vw;
     }
 
-    header>div>span>h2 {
+    header>div>a>h2 {
         font-size: 6.72vw;
     }
 
@@ -952,19 +964,6 @@ footer>div>div:nth-child(2)>svg {
 
     .banner h1 {
         font-size: 13.37vw;
-    }
-
-    .posterBlock>div {
-        height: 315px;
-    }
-
-    .posterBlock>div>a,
-    .posterBlock>div>div {
-        height: 300px;
-    }
-
-    .posterBlock>div>a>div {
-        margin-top: 202px;
     }
 
     h2,
