@@ -16,7 +16,7 @@
                 Iure itaque at facilis similique reprehenderit dolores totam quae, dicta, a voluptate mollitia sint esse eos laborum perferendis dolore! Eum laboriosam temporibus quos neque dolor accusantium possimus aperiam nisi libero.</p>
             </div>
             <div class="menu" style="margin: 40px 0;">
-                <a href='url "main_page"' class="backBtn">На главную</a>
+                <router-link to='/' class="backBtn">На главную</router-link>
                 <div>
                     <a href="#"
                        class="last {% if not last.link_pk %}unactive{% endif %}"
@@ -47,7 +47,7 @@ html {
     top: 50%;
     width: 100px;
     height: 100px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     transform: translate(-50%, -50%);
     animation: preAnim 1s ease-in-out infinite;
     z-index: -1;
@@ -82,7 +82,7 @@ body {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #FF7400 #FFF;
+    scrollbar-color: #55a4ff #FFF;
 }
 
 *::-webkit-scrollbar {
@@ -94,7 +94,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #FF7400;
+    background-color: #55a4ff;
 }
 
 h1,
@@ -175,7 +175,7 @@ header>div>span>h2>span {
     display: block;
     font-family: "Montserrat", sans-serif;
     font-size: 48px;
-    color: #FF7400;
+    color: #55a4ff;
 }
 
 #darker {
@@ -202,7 +202,7 @@ header>div>span>h2>span {
 .burger>div {
     width: 30px;
     height: 4px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
@@ -254,17 +254,17 @@ header>div>ul>li>span>b {
 }
 
 header>div>ul>li>span:hover>b {
-    color: #FF7400;
+    color: #55a4ff;
 }
 
-/* header > div > ul > li > span:hover > span {border-color:#FF7400;} */
+/* header > div > ul > li > span:hover > span {border-color:#55a4ff;} */
 
 header>div>ul>li>span::after {
     content: "";
     display: block;
     width: 100%;
     height: 3px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 2px;
     margin-top: 10px;
     transition: all 0.2s ease-in-out;
@@ -363,7 +363,7 @@ main {
     display: block;
     width: 3px;
     height: inherit;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 2px;
     margin-right: 20px;
     transition: all 0.2s ease-in-out;
@@ -530,7 +530,7 @@ main {
 .posterBlock>div>div {
     width: calc(100% - 15px);
     height: 505px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 10px 5px;
 }
 
@@ -621,7 +621,7 @@ main {
 .posterBlock2>div>div:nth-child(1) {
     width: calc(100% - 10px);
     height: calc(100% - 10px);
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 10px 5px;
 }
 
@@ -676,7 +676,7 @@ footer {
     align-items: center;
     width: 100%;
     height: 100px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     margin-top: 90px;
     transition: all 0.2s ease-in-out;
 }
@@ -747,7 +747,7 @@ footer>div>div:nth-child(2)>svg {
 .comment-form button {
     display: block;
     padding: 10px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -919,7 +919,7 @@ footer>div>div:nth-child(2)>svg {
     align-items: center;
     padding: 10px 15px;
     border-radius: 10px 5px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     color: #FFF;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -938,7 +938,7 @@ footer>div>div:nth-child(2)>svg {
 }
 
 .backBtn:hover {
-    background-color: #DB6300;
+    background-color: #2c5eaa;
 }
 
 .backBtn:hover::before {
@@ -958,7 +958,7 @@ footer>div>div:nth-child(2)>svg {
     width: 44px;
     height: 44px;
     border-radius: 10px 5px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     color: #FFF;
     transition: all 0.2s ease-in-out;
     cursor: pointer;
@@ -970,7 +970,7 @@ footer>div>div:nth-child(2)>svg {
 }
 
 .menu>div>a:hover {
-    background-color: #DB6300;
+    background-color: #2c5eaa;
 }
 
 .menu>div>a:nth-child(n+2) {
@@ -993,7 +993,7 @@ footer>div>div:nth-child(2)>svg {
 }
 
 .menu>div>a>div:hover {
-    background-color: #DB6300;
+    background-color: #2c5eaa;
 }
 
 .s1ip {

@@ -18,7 +18,7 @@ html {
     top: 50%;
     width: 100px;
     height: 100px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     transform: translate(-50%, -50%);
     animation: preAnim 1s ease-in-out infinite;
     z-index: -1;
@@ -53,7 +53,7 @@ body {
 
 * {
     scrollbar-width: thin;
-    scrollbar-color: #FF7400 #FFF;
+    scrollbar-color: #55a4ff #FFF;
 }
 
 *::-webkit-scrollbar {
@@ -65,7 +65,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: #FF7400;
+    background-color: #55a4ff;
 }
 
 h1,
@@ -120,8 +120,12 @@ header {
     border-radius: 0 0 40px 20px;
 }
 
-.smallHeader>div>a:nth-child(1)>h2 {
-    color: #000;
+header>div>a:nth-child(1)>svg>path:not(:last-child) {
+    transition: fill .2s linear;
+}
+
+.smallHeader>div>a:nth-child(1)>svg>path:not(:last-child) {
+    fill: #000;
 }
 
 .smallHeader>div>ul>li>a>b {
@@ -141,6 +145,11 @@ header {
     padding: 0 30px;
 }
 
+header .logo_svg {
+    height: 43px;
+    width: auto;
+}
+
 header>div>a>h2 {
     display: block;
     font-size: 32px;
@@ -152,7 +161,7 @@ header>div>a>h2>span {
     display: block;
     font-family: "Montserrat", sans-serif;
     font-size: 48px;
-    color: #FF7400;
+    color: #55a4ff;
 }
 
 #darker {
@@ -179,7 +188,7 @@ header>div>a>h2>span {
 .burger>div {
     width: 30px;
     height: 3px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 10px;
     transition: all 0.3s ease-in-out;
 }
@@ -232,17 +241,17 @@ header>div>ul>li>a>b {
 }
 
 header>div>ul>li>a:hover>b {
-    color: #FF7400;
+    color: #55a4ff;
 }
 
-/* header > div > ul > li > span:hover > span {border-color:#FF7400;} */
+/* header > div > ul > li > span:hover > span {border-color:#55a4ff;} */
 
 header>div>ul>li>a::after {
     content: "";
     display: block;
     width: 100%;
     height: 3px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 2px;
     margin-top: 10px;
     transition: all 0.2s ease-in-out;
@@ -352,7 +361,7 @@ main {
     display: block;
     width: 3px;
     height: inherit;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 2px;
     margin-right: 20px;
     transition: all 0.2s ease-in-out;
@@ -532,7 +541,7 @@ main {
 .posterBlock .posterBlockSlide>div {
     width: calc(100% - 15px);
     height: 505px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 10px 5px;
 }
 
@@ -585,7 +594,7 @@ main {
 }
 
 .posterBlock .posterBlockSlide>a:hover>div>span::-webkit-scrollbar-thumb {
-    background-color: #FF7400;
+    background-color: #55a4ff;
 }
 
 .posterBlock .posterBlockSlide>a:hover>div>span::-webkit-scrollbar-track {
@@ -658,7 +667,7 @@ main {
 .posterBlock2>div>div {
     width: calc(100% - 10px);
     height: 300px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     border-radius: 10px 5px;
 }
 
@@ -749,7 +758,7 @@ footer {
     align-items: center;
     width: 100%;
     height: 100px;
-    background-color: #FF7400;
+    background-color: #55a4ff;
     margin-top: 90px;
     border-radius: 40px 20px 0 0;
     transition: all 0.2s ease-in-out;
@@ -801,7 +810,7 @@ footer>div>div:nth-child(2)>svg {
     margin-top: -45.5px;
     border-radius: 10px 5px;
     background-color: rgba(255, 255, 255, 0.8);
-    color: #FF7400;
+    color: #55a4ff;
     font-weight: 600;
     transition: all 0.2s ease-in-out;
 }
@@ -832,7 +841,7 @@ footer>div>div:nth-child(2)>svg {
         display: none;
     }
     header>div>ul>li>a { transition: all 0.2s ease-in-out; }
-    header>div>ul>li>a:hover{ background-color: #FF7400; }
+    header>div>ul>li>a:hover{ background-color: #55a4ff; }
     header>div>ul>li>a:hover>b { color: #FFF; }
 
     .header_buttons>li {
