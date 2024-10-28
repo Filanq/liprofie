@@ -133,6 +133,7 @@
     }
 
     .container__login{
+        max-width: 500px;
         position: relative;
         background-color: white;
         border-radius: 15px;
@@ -155,6 +156,11 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        width: 100%;
+    }
+    
+    p{
+        margin: 0;
     }
 
     .input_password{
@@ -186,6 +192,8 @@
 
     .title-card{
         font-size: 22px;
+        width: 100%;
+        overflow-y: scroll !important;
     }
 
     .group_edit{
@@ -244,4 +252,10 @@
         background-color: #eee;
     }
     
+
+    @media (max-width: 520px) {
+        .container__login{
+            width: 90%;
+        }
+    }
 </style>
