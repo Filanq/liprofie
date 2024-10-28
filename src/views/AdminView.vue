@@ -1,6 +1,6 @@
 <template>
     
-<!--    <LoginComponent @success="closeLogin()" v-if="isLoginOpened"/>-->
+    <LoginComponent @success="closeLogin()" v-if="isLoginOpened"/>
     <EditComponentsPlaces @reload="loadPlaces()" :place="editPlacesData" v-if="isEditPlacesOpened" @close="closeEditPlaces()"/>
     <AddComponentsPlaces @reload="loadPlaces()" v-if="isAddPlacesOpened" @close="closeAddPlaces()"/>
     <EditComponentsProf @reload="loadProfessions()" :prof="editProfData" v-if="isEditProfOpened" @close="closeEditProf()"/>
@@ -89,9 +89,9 @@
     let isEditProfOpened: Ref<boolean> = ref(false);
     let isAddProfOpened: Ref<boolean> = ref(false);
 
-    // watch(user, () => {
-    //     isLoginOpened.value = !user.is_auth;
-    // });
+    watch(user, () => {
+        isLoginOpened.value = !user.is_auth;
+    });
 
     let editPlacesData: Ref<Places> = ref({
         id: 0,
