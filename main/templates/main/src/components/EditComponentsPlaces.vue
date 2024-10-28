@@ -139,6 +139,7 @@
 </script>
 
 <style> 
+
     .cross{
         position: absolute;
         top: -12px;
@@ -169,6 +170,7 @@
     }
 
     .container__login{
+        max-width: 500px;
         position: relative;
         background-color: white;
         border-radius: 15px;
@@ -218,10 +220,16 @@
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 10px;
+        word-wrap: break-word;
+        max-height: 50px;
     }
 
     .title-card{
         font-size: 22px;
+        width: 100%;
+        overflow-y: scroll !important;
+        word-wrap: break-word;
+        max-height: 50px;
     }
 
     .group_edit{
@@ -284,6 +292,12 @@
         font-size: 18px;
         margin: 20px 0 0;
         color: red;
+    }
+
+    @media (max-width: 520px) {
+        .container__login{
+            width: 90%;
+        }
     }
     
 </style>

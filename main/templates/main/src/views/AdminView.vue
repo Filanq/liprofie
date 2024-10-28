@@ -83,7 +83,7 @@
 
     let user = useUserStore();
 
-    let isLoginOpened: Ref<boolean> = ref(!user.is_auth);
+    let isLoginOpened: Ref<boolean> = ref(false);
     let isEditPlacesOpened: Ref<boolean> = ref(false);
     let isAddPlacesOpened: Ref<boolean> = ref(false);
     let isEditProfOpened: Ref<boolean> = ref(false);
@@ -349,6 +349,27 @@
         color: white;
         z-index: 5;
         font-size: 20px;
+    }
+
+    @media (max-width: 750px) {
+        .container{
+            padding: 0 20px;
+        }
+
+        h1{
+            font-size: 44px;
+        }
+
+        h2{
+            font-size: 36px;
+        }
+
+        .btn{
+            font-size: 30px;
+            padding: 2px 8px;
+        }
+
+
     }
 
 </style>

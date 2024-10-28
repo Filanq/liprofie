@@ -133,6 +133,7 @@
     }
 
     .container__login{
+        max-width: 500px;
         position: relative;
         background-color: white;
         border-radius: 15px;
@@ -155,6 +156,11 @@
         display: flex;
         flex-direction: column;
         gap: 20px;
+        width: 100%;
+    }
+    
+    p{
+        margin: 0;
     }
 
     .input_password{
@@ -182,10 +188,16 @@
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 10px;
+        word-wrap: break-word;
+        max-height: 50px;
     }
 
     .title-card{
         font-size: 22px;
+        width: 100%;
+        overflow-y: scroll !important;
+        word-wrap: break-word;
+        max-height: 50px;
     }
 
     .group_edit{
@@ -244,4 +256,10 @@
         background-color: #eee;
     }
     
+
+    @media (max-width: 520px) {
+        .container__login{
+            width: 90%;
+        }
+    }
 </style>
