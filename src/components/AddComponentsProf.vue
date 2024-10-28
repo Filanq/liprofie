@@ -146,9 +146,15 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100%;
+    }
+    
+    p{
+        margin: 0;
     }
 
     .container__login{
+        max-width: 500px;
         position: relative;
         background-color: white;
         border-radius: 15px;
@@ -202,6 +208,8 @@
 
     .title-card{
         font-size: 22px;
+        width: 100%;
+        overflow-y: scroll;
     }
 
     .group_edit{
@@ -258,6 +266,12 @@
     
     .input-file input[type=file]:disabled + .input-file-btn {
         background-color: #eee;
+    }
+
+    @media (max-width: 520px) {
+        .container__login{
+            width: 90%;
+        }
     }
     
 </style>

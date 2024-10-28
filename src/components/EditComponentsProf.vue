@@ -211,6 +211,7 @@
     }
 
     .section__login{
+
         z-index: 100;
         position: fixed;
         width: 100vw;
@@ -223,6 +224,7 @@
     }
 
     .container__login{
+        max-width: 500px;
         position: relative;
         background-color: white;
         border-radius: 15px;
@@ -332,6 +334,12 @@
     
     .input-file input[type=file]:disabled + .input-file-btn {
         background-color: #eee;
+    }
+
+    @media (max-width: 520px) {
+        .container__login{
+            width: 90%;
+        }
     }
     
 </style>

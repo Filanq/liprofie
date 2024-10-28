@@ -351,4 +351,25 @@
         font-size: 20px;
     }
 
+    @media (max-width: 750px) {
+        .container{
+            padding: 0 20px;
+        }
+
+        h1{
+            font-size: 44px;
+        }
+
+        h2{
+            font-size: 36px;
+        }
+
+        .btn{
+            font-size: 30px;
+            padding: 2px 8px;
+        }
+
+
+    }
+
 </style>
