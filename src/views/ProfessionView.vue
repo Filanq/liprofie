@@ -9,7 +9,7 @@
             <div>
                 <div class="posterBlock2">
                     <img id="mainImg" :src="data.img1" alt="Картинка 1">
-                    <img id="secImg" :src="data.img1" alt="Картинка 2">
+                    <img id="secImg" :src="data.img2" alt="Картинка 2">
                 </div>
                 <p id="mainText">
                     {{ data.text }}
@@ -17,14 +17,6 @@
             </div>
             <div class="menu" style="margin: 40px 0;">
                 <router-link to='/' class="backBtn">На главную</router-link>
-                <div>
-                    <router-link v-if="Number(router.query.professionId) - 1 >= 1 && professions.filter(el => {return el.id === Number(router.query.professionId) - 1}).length > 0" :to="'/profession/' + (Number(router.query.professionId) - 1)">
-                        <div></div>
-                    </router-link>
-                    <router-link v-if="next_id !== -1" :to="'/profession/' + next_id">
-                        <div></div>
-                    </router-link>
-                </div>
             </div>
         </section>
         <section class="container2 s1ip" v-else>
@@ -59,14 +51,13 @@
     let error: Ref<string> = ref('');
 
     const loadProfessions = () => {
-        axios.get(window.origin + '/api/professions').then(res => {
-            console.log(res);
-            professions.value = res.data.professions;
+        axios.get(window.origin + '/api/professions/').then(res => {
+            professions.value = res.data;
             if(professions.value === undefined){
                 error.value = 'Страница не найдена';
                 return;
             }
-            let current_profession = professions.value.filter((el) => {return el.id === Number(router.query.professionId)})[0];
+            let current_profession = professions.value.filter((el) => {return el.id === Number(router.params.professionId)})[0];
             if(current_profession === undefined){
                 error.value = 'Страница не найдена';
                 return;
@@ -75,6 +66,7 @@
             if(professions.value[next_id.value] === undefined){
                 next_id.value = -1;
             }
+            data.value = current_profession;
         });
     };
 

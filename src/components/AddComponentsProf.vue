@@ -42,7 +42,7 @@
     import { useUserStore } from '@/stores/user';
     import axios from "axios";
 
-    const emits = defineEmits(['close']);
+    const emits = defineEmits(['close', 'reload']);
     let error: Ref<string> = ref('');
     let user = useUserStore();
 
@@ -100,6 +100,7 @@
                     "X-CSRFTOKEN": user.getCookie('csrftoken')
                 }
             }).then(res => {
+                emits('reload');
                 emits('close');
                 data.value = {
                     id: 0,

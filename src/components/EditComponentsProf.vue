@@ -64,7 +64,7 @@
 
     let elementsEdits: Ref<boolean[]> = ref([false, false]);
     let error: Ref<string> = ref('');
-    const emits = defineEmits(['close']);
+    const emits = defineEmits(['close', 'reload']);
     const props = defineProps(['prof']);
     let user = useUserStore();
 
@@ -121,20 +121,70 @@
                 img2 = null;
             }
 
-            axios.patch(window.origin + "/api/professions/" + data.value.id, {
-                title: data.value.title,
-                text: data.value.text,
-                img1: img1,
-                img2: img2
-            }, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    "X-CSRFTOKEN": user.getCookie('csrftoken')
-                }
-            }).then(res => {
-                emits('close');
-                error.value = '';
-            });
+            if (img1 !== null && img2 !== null){
+                axios.patch(window.origin + "/api/professions/" + data.value.id + '/', {
+                    title: data.value.title,
+                    text: data.value.text,
+                    img1: img1,
+                    img2: img2
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        "X-CSRFTOKEN": user.getCookie('csrftoken')
+                    }
+                }).then(res => {
+                    emits('reload');
+                    emits('close');
+                    error.value = '';
+                });
+            }
+            else if(img1 !== null && img2 === null){
+                axios.patch(window.origin + "/api/professions/" + data.value.id + '/', {
+                    title: data.value.title,
+                    text: data.value.text,
+                    img1: img1
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        "X-CSRFTOKEN": user.getCookie('csrftoken')
+                    }
+                }).then(res => {
+                    emits('reload');
+                    emits('close');
+                    error.value = '';
+                });
+            }
+            else if(img1 === null && img2 !== null){
+                axios.patch(window.origin + "/api/professions/" + data.value.id + '/', {
+                    title: data.value.title,
+                    text: data.value.text,
+                    img2: img2
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        "X-CSRFTOKEN": user.getCookie('csrftoken')
+                    }
+                }).then(res => {
+                    emits('reload');
+                    emits('close');
+                    error.value = '';
+                });
+            }
+            else{
+                axios.patch(window.origin + "/api/professions/" + data.value.id + '/', {
+                    title: data.value.title,
+                    text: data.value.text
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        "X-CSRFTOKEN": user.getCookie('csrftoken')
+                    }
+                }).then(res => {
+                    emits('reload');
+                    emits('close');
+                    error.value = '';
+                });
+            }
         }
         else{
             error.value = 'Авторизуйтесь'

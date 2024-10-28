@@ -59,7 +59,7 @@
 
     let elementsEdits: Ref<boolean[]> = ref([false, false]);
     let error: Ref<string> = ref('');
-    const emits = defineEmits(['close']);
+    const emits = defineEmits(['close', 'reload']);
     const props = defineProps(['place']);
     let user = useUserStore();
 
@@ -101,24 +101,36 @@
             let img: any = document.querySelector('#img');
             if(img.files.length > 0){
                 img = img.files[0];
+                axios.patch(window.origin + "/api/places/" + data.value.id + '/', {
+                    title: data.value.title,
+                    text: data.value.text,
+                    img: img
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        "X-CSRFTOKEN": user.getCookie('csrftoken')
+                    }
+                }).then(res => {
+                    emits('reload');
+                    emits('close');
+                    error.value = '';
+                });
             }
             else{
-                img = null;
+                axios.patch(window.origin + "/api/places/" + data.value.id + '/', {
+                    title: data.value.title,
+                    text: data.value.text
+                }, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                        "X-CSRFTOKEN": user.getCookie('csrftoken')
+                    }
+                }).then(res => {
+                    emits('reload');
+                    emits('close');
+                    error.value = '';
+                });
             }
-
-            axios.patch(window.origin + "/api/places/" + data.value.id, {
-                title: data.value.title,
-                text: data.value.text,
-                img: img
-            }, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                    "X-CSRFTOKEN": user.getCookie('csrftoken')
-                }
-            }).then(res => {
-                emits('close');
-                error.value = '';
-            });
         }
         else{
             error.value = 'Авторизуйтесь'

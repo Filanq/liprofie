@@ -28,5 +28,7 @@ export const useUserStore = defineStore('user', () => {
         });
     }
 
+    login();
+
     return { is_auth, getCookie, login };
 });

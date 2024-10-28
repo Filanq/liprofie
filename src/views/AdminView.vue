@@ -1,10 +1,10 @@
 <template>
     
-    <LoginComponent @success="closeLogin()" v-if="isLoginOpened"/>
-    <EditComponentsPlaces :place="editPlacesData" v-if="isEditPlacesOpened" @close="closeEditPlaces()"/>
-    <AddComponentsPlaces v-if="isAddPlacesOpened" @close="closeAddPlaces()"/>
-    <EditComponentsProf :prof="editProfData" v-if="isEditProfOpened" @close="closeEditProf()"/>
-    <AddComponentsProf v-if="isAddProfOpened" @close="closeAddProf()"/>
+<!--    <LoginComponent @success="closeLogin()" v-if="isLoginOpened"/>-->
+    <EditComponentsPlaces @reload="loadPlaces()" :place="editPlacesData" v-if="isEditPlacesOpened" @close="closeEditPlaces()"/>
+    <AddComponentsPlaces @reload="loadPlaces()" v-if="isAddPlacesOpened" @close="closeAddPlaces()"/>
+    <EditComponentsProf @reload="loadProfessions()" :prof="editProfData" v-if="isEditProfOpened" @close="closeEditProf()"/>
+    <AddComponentsProf @reload="loadProfessions()" v-if="isAddProfOpened" @close="closeAddProf()"/>
     <!-- <AddComponents v-if="true"/> -->
 
     <main class="section">
@@ -23,7 +23,7 @@
                 <div class="wrap">
                     <div v-for="prof in professions" class="block" :style="'background-image: url(' + prof.img1 + ')'">
                         <div class="block_top_wrap">
-                            <div @click.prevent="openEditProf({id: prof.id, title: prof.title, text: prof.text, img1: prof.img1.split('/')[-1], img2: prof.img2.split('/')[-1]})">
+                            <div @click.prevent="openEditProf({id: prof.id, title: prof.title, text: prof.text, img1: (prof.img1 ? prof.img1.split('/')[prof.img1.split('/').length - 1] : 'null'), img2: (prof.img2 ? prof.img2.split('/')[prof.img2.split('/').length - 1] : 'null')})">
                                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path  d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -47,7 +47,7 @@
                 <div class="wrap">
                     <div v-for="place in places" class="block" :style="'background-image: url(' + place.img + ')'">
                         <div class="block_top_wrap">
-                            <div @click="openEditPlaces({id: place.id, title: place.title, text: place.text, img: place.img.split('/')[-1]})">
+                            <div @click="openEditPlaces({id: place.id, title: place.title, text: place.text, img: (place.img ? place.img.split('/')[place.img.split('/').length - 1] : 'null')})">
                                 <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path  d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -83,11 +83,15 @@
 
     let user = useUserStore();
 
-    let isLoginOpened: Ref<boolean> = ref(!user.is_auth);
+    let isLoginOpened: Ref<boolean> = ref(false);
     let isEditPlacesOpened: Ref<boolean> = ref(false);
     let isAddPlacesOpened: Ref<boolean> = ref(false);
     let isEditProfOpened: Ref<boolean> = ref(false);
     let isAddProfOpened: Ref<boolean> = ref(false);
+
+    // watch(user, () => {
+    //     isLoginOpened.value = !user.is_auth;
+    // });
 
     let editPlacesData: Ref<Places> = ref({
         id: 0,
@@ -120,7 +124,7 @@
     };
 
     const deleteProf = (id: number) => {
-        axios.delete(window.origin + "/api/professions/" + String(id), {
+        axios.delete(window.origin + "/api/professions/" + String(id) + '/', {
             headers: {
                 "X-CSRFTOKEN": user.getCookie('csrftoken')
             }
@@ -145,7 +149,7 @@
     };
 
     const deletePlaces = (id: number) => {
-        axios.delete(window.origin + "/api/places/" + String(id), {
+        axios.delete(window.origin + "/api/places/" + String(id) + '/', {
             headers: {
                 "X-CSRFTOKEN": user.getCookie('csrftoken')
             }
@@ -161,9 +165,8 @@
     let professions: Ref<Professions[]> = ref([]);
 
     const loadProfessions = () => {
-        axios.get(window.origin + "/api/professions").then(res => {
-            console.log(res.data);
-            professions.value = res.data.professions;
+        axios.get(window.origin + "/api/professions/").then(res => {
+            professions.value = res.data;
         });
     };
     loadProfessions();
@@ -171,9 +174,8 @@
     let places: Ref<Places[]> = ref([]);
 
     const loadPlaces = () => {
-        axios.get(window.origin + "/api/places").then(res => {
-            console.log(res.data);
-            places.value = res.data.places;
+        axios.get(window.origin + "/api/places/").then(res => {
+            places.value = res.data;
         });
     };
     loadPlaces();

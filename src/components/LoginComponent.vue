@@ -25,7 +25,7 @@
 
     const submit = () => {
         axios.post(window.origin + '/api/login', {
-            password: password
+            password: password.value
         }, {
             headers: {
                 "X-CSRFTOKEN": user.getCookie('csrftoken')
