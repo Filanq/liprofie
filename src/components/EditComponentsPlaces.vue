@@ -220,12 +220,16 @@
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 10px;
+        word-wrap: break-word;
+        max-height: 50px;
     }
 
     .title-card{
         font-size: 22px;
         width: 100%;
         overflow-y: scroll !important;
+        word-wrap: break-word;
+        max-height: 50px;
     }
 
     .group_edit{
