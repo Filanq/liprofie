@@ -122,10 +122,6 @@ USE_TZ = True
 
 STATIC_URL = '/assets/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "main/templates/main/dist/assets"
-]
-
 STATIC_ROOT = BASE_DIR / "main/templates/main/dist/assets"
 
 MEDIA_URL = '/media/'
