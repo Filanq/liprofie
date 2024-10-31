@@ -20,6 +20,8 @@ from main.views import index
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
+import re
+from django.views.static import serve
 
 
 urlpatterns = [
@@ -27,6 +29,10 @@ urlpatterns = [
     path('admin/', index),
     path('profession/<int:pk>', index),
     path('', index),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()
-
-print(urlpatterns)
+    re_path(
+      r"^%s(?P<path>.*)$" % re.escape('/media/'.lstrip("/")), serve, kwargs={"document_root": settings.MEDIA_ROOT}
+    ),
+    re_path(
+      r"^%s(?P<path>.*)$" % re.escape('/assets/'.lstrip("/")), serve, kwargs={"document_root": settings.STATIC_ROOT}
+    ),
+]
