@@ -25,6 +25,6 @@ from django.conf import settings
 urlpatterns = [
     path('api/', include("main.urls")),
     path('admin/', index),
-    path('profession/<pk:int>', index),
+    path('profession/<int:pk>', index),
     path('', index),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + staticfiles_urlpatterns()
