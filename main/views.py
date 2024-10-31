@@ -30,7 +30,7 @@ class PlacesList(viewsets.ModelViewSet):
 
 
 # Index View
-def index(request):
+def index(request, pk=0):
     return render(request, "main/dist/index.html")
 
 
