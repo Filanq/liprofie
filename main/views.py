@@ -1,7 +1,7 @@
 from django.shortcuts import render, HttpResponse
 from rest_framework import viewsets
-from .serializers import ProfessionSerializer, PlacesSerializer
-from .models import Profession, Place, Auser
+from .serializers import ProfessionSerializer, PlacesSerializer, EventsSerializer
+from .models import Profession, Place, Auser, Event
 from .permissions import Admin, Any
 from django.contrib.auth.hashers import make_password, check_password
 import json
@@ -11,6 +11,17 @@ import json
 class ProfessionsList(viewsets.ModelViewSet):
     queryset = Profession.objects.all()
     serializer_class = ProfessionSerializer
+
+    def get_permissions(self):
+        if self.action in ['list', 'retrieve']:
+            return [Any()]
+        return [Admin()]
+
+
+# Professions List
+class EventsList(viewsets.ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventsSerializer
 
     def get_permissions(self):
         if self.action in ['list', 'retrieve']:

@@ -16,3 +16,10 @@ class Place(models.Model):
     title = models.CharField(max_length=250, null=True)
     text = models.TextField(max_length=1000, null=True)
     img = models.ImageField(blank=True, null=True, upload_to='places')
+
+
+class Event(models.Model):
+    title = models.CharField(max_length=250, null=True)
+    text = models.TextField(max_length=1000, null=True)
+    date = models.DateField(null=True, blank=True)
+    img = models.ImageField(blank=True, null=True, upload_to='events')
