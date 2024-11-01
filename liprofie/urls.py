@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/', include("main.urls")),
     path('admin/', index),
     path('profession/<int:pk>', index),
+    path('event/<int:pk>', index),
     path('', index),
     re_path(
       r"^%s(?P<path>.*)$" % re.escape('/media/'.lstrip("/")), serve, kwargs={"document_root": settings.MEDIA_ROOT}

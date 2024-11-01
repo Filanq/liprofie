@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-    import type {Professions, Events} from "@/types";
+    import type {Events} from "@/types";
     import {ref, type Ref} from "vue";
     import axios from "axios";
     import { useRoute } from "vue-router";
@@ -47,8 +47,6 @@
 
     let events: Ref<Events[]> = ref([]);
 
-    let next_id: Ref<number> = ref(0);
-
     let error: Ref<string> = ref('');
 
     const loadEvents = () => {
@@ -62,10 +60,6 @@
             if(current_event === undefined){
                 error.value = 'Страница не найдена';
                 return;
-            }
-            next_id.value = current_event.value.indexOf(data.value) + 1;
-            if(events.value[next_id.value] === undefined){
-                next_id.value = -1;
             }
             data.value = current_event;
         });
