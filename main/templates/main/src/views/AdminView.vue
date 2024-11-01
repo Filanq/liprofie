@@ -137,7 +137,7 @@
         img2: ""
     });
 
-    let editEventsData: Ref<Places> = ref({
+    let editEventsData: Ref<Events> = ref({
         id: 0,
         title: "",
         text: "",
