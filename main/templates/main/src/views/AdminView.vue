@@ -5,6 +5,8 @@
     <AddComponentsPlaces @reload="loadPlaces()" v-if="isAddPlacesOpened" @close="closeAddPlaces()"/>
     <EditComponentsProf @reload="loadProfessions()" :prof="editProfData" v-if="isEditProfOpened" @close="closeEditProf()"/>
     <AddComponentsProf @reload="loadProfessions()" v-if="isAddProfOpened" @close="closeAddProf()"/>
+    <EditComponentEvents @reload="loadEvents()" :prof="editEventsData" v-if="isEditEventsOpened" @close="closeEditEvents()"/>
+    <AddComponentsEvents @reload="loadEvents()" v-if="isAddEventsOpened" @close="closeAddEvents()"/>
     <!-- <AddComponents v-if="true"/> -->
 
     <main class="section">
@@ -64,6 +66,29 @@
                     </div>
                 </div>
             </div>
+            <div class="wrap_title">
+                <h2>События</h2>
+                <div @click.prevent="openAddEvents()" class="btn">+</div>
+            </div>
+            <div class="wrap">
+                <div v-for="event in events" class="block" :style="'background-image: url(' + event.img + ')'">
+                    <div class="block_top_wrap">
+                        <div @click="openEditEvents({id: event.id, title: event.title, text: event.text, img: (event.img ? event.img.split('/')[event.img.split('/').length - 1] : 'null')})">
+                            <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path  d="M21.2799 6.40005L11.7399 15.94C10.7899 16.89 7.96987 17.33 7.33987 16.7C6.70987 16.07 7.13987 13.25 8.08987 12.3L17.6399 2.75002C17.8754 2.49308 18.1605 2.28654 18.4781 2.14284C18.7956 1.99914 19.139 1.92124 19.4875 1.9139C19.8359 1.90657 20.1823 1.96991 20.5056 2.10012C20.8289 2.23033 21.1225 2.42473 21.3686 2.67153C21.6147 2.91833 21.8083 3.21243 21.9376 3.53609C22.0669 3.85976 22.1294 4.20626 22.1211 4.55471C22.1128 4.90316 22.0339 5.24635 21.8894 5.5635C21.7448 5.88065 21.5375 6.16524 21.2799 6.40005V6.40005Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M11 4H6C4.93913 4 3.92178 4.42142 3.17163 5.17157C2.42149 5.92172 2 6.93913 2 8V18C2 19.0609 2.42149 20.0783 3.17163 20.8284C3.92178 21.5786 4.93913 22 6 22H17C19.21 22 20 20.2 20 18V13" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <div @click="deleteEvents(event.id)">
+                            <svg fill="white" width="28px" height="28px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+                            <title>trashcan</title>
+                            <path d="M8 26c0 1.656 1.343 3 3 3h10c1.656 0 3-1.344 3-3l2-16h-20l2 16zM19 13h2v13h-2v-13zM15 13h2v13h-2v-13zM11 13h2v13h-2v-13zM25.5 6h-6.5c0 0-0.448-2-1-2h-4c-0.553 0-1 2-1 2h-6.5c-0.829 0-1.5 0.671-1.5 1.5s0 1.5 0 1.5h22c0 0 0-0.671 0-1.5s-0.672-1.5-1.5-1.5z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div>{{ event.title }}</div>
+                </div>
+            </div>
         </div>
     </main>
 </template>
@@ -77,17 +102,21 @@
     import AddComponentsProf from "@/components/AddComponentsProf.vue";
     import EditComponentsPlaces from "@/components/EditComponentsPlaces.vue";
     import AddComponentsPlaces from "@/components/AddComponentsPlaces.vue";
-    import type { Places, Professions } from '@/types';
+    import EditComponentsEvents from "@/components/EditComponentsEvents.vue";
+    import AddComponentsEvents from "@/components/AddComponentsEvents.vue";
+    import type { Places, Professions, Events } from '@/types';
     import axios from "axios";
     import {useUserStore} from "@/stores/user";
 
     let user = useUserStore();
 
-    let isLoginOpened: Ref<boolean> = ref(!user.is_auth);
+    let isLoginOpened: Ref<boolean> = ref(false);
     let isEditPlacesOpened: Ref<boolean> = ref(false);
     let isAddPlacesOpened: Ref<boolean> = ref(false);
     let isEditProfOpened: Ref<boolean> = ref(false);
     let isAddProfOpened: Ref<boolean> = ref(false);
+    let isEditEventsOpened: Ref<boolean> = ref(false);
+    let isAddEventsOpened: Ref<boolean> = ref(false);
 
     watch(user, () => {
         isLoginOpened.value = !user.is_auth;
@@ -106,6 +135,14 @@
         text: "",
         img1: "",
         img2: ""
+    });
+
+    let editEventsData: Ref<Places> = ref({
+        id: 0,
+        title: "",
+        text: "",
+        img: "",
+        date: ""
     });
 
     const openEditProf = (data: Professions) => {
@@ -130,6 +167,31 @@
             }
         }).then(res => {
             loadProfessions();
+        });
+    };
+
+    const openEditEvents = (data: Events) => {
+        editEventsData.value = data;
+        isEditEventsOpened.value = true;
+    };
+    const closeEditEvents = () => {
+        isEditEventsOpened.value = false;
+    };
+
+    const openAddEvents = () => {
+        isAddEventsOpened.value = true;
+    };
+    const closeAddEvents = () => {
+        isAddEventsOpened.value = false;
+    };
+
+    const deleteEvents = (id: number) => {
+        axios.delete(window.origin + "/api/events/" + String(id) + '/', {
+            headers: {
+                "X-CSRFTOKEN": user.getCookie('csrftoken')
+            }
+        }).then(res => {
+            loadEvents();
         });
     };
 
@@ -179,10 +241,20 @@
         });
     };
     loadPlaces();
+    
+
+    let events: Ref<Events[]> = ref([]);
+
+    const loadEvents = () => {
+        axios.get(window.origin + "/api/events/").then(res => {
+            events.value = res.data;
+        });
+    };
+    loadPlaces();
 
     onMounted(() => {
         const checkForOverflow = () => {
-            if(isLoginOpened.value || isAddProfOpened.value || isAddPlacesOpened.value || isEditProfOpened.value || isEditPlacesOpened.value){
+            if(isLoginOpened.value || isAddProfOpened.value || isAddPlacesOpened.value || isEditProfOpened.value || isEditPlacesOpened.value || isEditEventsOpened.value || isAddEventsOpened.value){
                 document.body.style.overflowY = 'hidden';
             }
             else{
@@ -190,7 +262,7 @@
             }
         };
 
-        watch([isLoginOpened, isAddProfOpened, isAddPlacesOpened, isEditProfOpened, isEditPlacesOpened], checkForOverflow, {deep: true});
+        watch([isLoginOpened, isAddProfOpened, isAddPlacesOpened, isEditProfOpened, isEditPlacesOpened, isEditEventsOpened, isAddEventsOpened], checkForOverflow, {deep: true});
         checkForOverflow();
     });
 

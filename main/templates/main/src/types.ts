@@ -12,3 +12,11 @@ export type Professions = {
     img1: string,
     img2: string
 };
+
+export type Events = {
+    id: number,
+    title: string,
+    text: string,
+    img: string,
+    date: string
+};
