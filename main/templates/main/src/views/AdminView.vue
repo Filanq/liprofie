@@ -110,7 +110,7 @@
 
     let user = useUserStore();
 
-    let isLoginOpened: Ref<boolean> = ref(false);
+    let isLoginOpened: Ref<boolean> = ref(!user.is_auth);
     let isEditPlacesOpened: Ref<boolean> = ref(false);
     let isAddPlacesOpened: Ref<boolean> = ref(false);
     let isEditProfOpened: Ref<boolean> = ref(false);
