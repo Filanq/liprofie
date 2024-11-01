@@ -20,6 +20,11 @@ const router = createRouter({
       name: 'admin',
       component: () => import('@/views/AdminView.vue')
     },
+    {
+      path: '/event/:eventId',
+      name: 'event',
+      component: () => import('@/views/EventView.vue')
+    },
   ]
 })
 
