@@ -5,7 +5,7 @@
     <AddComponentsPlaces @reload="loadPlaces()" v-if="isAddPlacesOpened" @close="closeAddPlaces()"/>
     <EditComponentsProf @reload="loadProfessions()" :prof="editProfData" v-if="isEditProfOpened" @close="closeEditProf()"/>
     <AddComponentsProf @reload="loadProfessions()" v-if="isAddProfOpened" @close="closeAddProf()"/>
-    <EditComponentEvents @reload="loadEvents()" :prof="editEventsData" v-if="isEditEventsOpened" @close="closeEditEvents()"/>
+    <EditComponentsEvents @reload="loadEvents()" :events="editEventsData" v-if="isEditEventsOpened" @close="closeEditEvents()"/>
     <AddComponentsEvents @reload="loadEvents()" v-if="isAddEventsOpened" @close="closeAddEvents()"/>
     <!-- <AddComponents v-if="true"/> -->
 
@@ -250,7 +250,7 @@
             events.value = res.data;
         });
     };
-    loadPlaces();
+    loadEvents();
 
     onMounted(() => {
         const checkForOverflow = () => {
