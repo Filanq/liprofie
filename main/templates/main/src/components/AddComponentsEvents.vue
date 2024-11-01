@@ -81,7 +81,7 @@
                 img = null;
             }
 
-            axios.post(window.origin + "/api/places/", {
+            axios.post(window.origin + "/api/events/", {
                 title: data.value.title,
                 text: data.value.text,
                 img: img,

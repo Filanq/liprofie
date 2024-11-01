@@ -79,7 +79,7 @@
     const props = defineProps(['events']);
     let user = useUserStore();
 
-    let data: Ref<Places> = ref({
+    let data: Ref<Events> = ref({
         id: Number(props.events.id),
         title: String(props.events.title),
         text: String(props.events.text),
@@ -119,7 +119,7 @@
             let img: any = document.querySelector('#img');
             if(img.files.length > 0){
                 img = img.files[0];
-                axios.patch(window.origin + "/api/places/" + data.value.id + '/', {
+                axios.patch(window.origin + "/api/events/" + data.value.id + '/', {
                     title: data.value.title,
                     text: data.value.text,
                     date: data.value.date,
@@ -136,7 +136,7 @@
                 });
             }
             else{
-                axios.patch(window.origin + "/api/places/" + data.value.id + '/', {
+                axios.patch(window.origin + "/api/events/" + data.value.id + '/', {
                     title: data.value.title,
                     text: data.value.text,
                     date: data.value.date,
